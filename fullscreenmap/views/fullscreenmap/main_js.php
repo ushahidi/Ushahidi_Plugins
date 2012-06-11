@@ -2,10 +2,7 @@
 $(document).ready(function() {
 	var orig_width = $("#map").width();
 	var orig_height = $("#map").height();
-	
-	currZoom = map.getZoom();
-	currCenter = map.getCenter();
-	
+		
 	$(".fullscreenmap_click").colorbox({
 		width:"100%", 
 		height:"100%", 
@@ -17,15 +14,17 @@ $(document).ready(function() {
 			$("#map").height("99%");
 //			$("#map").append(<?php echo $categories_view;?>);
 //			$(".fullscreenmap_cats").draggable( { handle: 'h2' } );
-			map.setCenter(currCenter, currZoom, false, false);
-			map.pan(0,1); //++ Fixes white tile issue onresize
+			
+			// Dimensions of the viewport have changed
+			// Trigger a resize
+			map.trigger("resize");
 		},
 		// Return DIV to original state
 		onClosed:function(){
 			$("#map").width(orig_width);
 			$("#map").height(orig_height);
 			$("#map").show();
-			map.setCenter(currCenter, currZoom, false, false);
+			map.trigger("resize");
 		}
 	});
 });
