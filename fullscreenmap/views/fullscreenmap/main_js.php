@@ -2,18 +2,16 @@
 $(document).ready(function() {
 	var orig_width = $("#map").width();
 	var orig_height = $("#map").height();
-		
-	$(".fullscreenmap_click").colorbox({
+	
+	$(".fullscreenmap_click").click(function () { $.colorbox({
 		width:"100%", 
 		height:"100%", 
 		inline:true, 
 		href:"#map",
 		// Resize Map DIV and Refresh
 		onComplete:function(){
-		    $("#map").width("99%");
+			$("#map").width("99%");
 			$("#map").height("99%");
-//			$("#map").append(<?php echo $categories_view;?>);
-//			$(".fullscreenmap_cats").draggable( { handle: 'h2' } );
 			
 			// Dimensions of the viewport have changed
 			// Trigger a resize
@@ -26,6 +24,6 @@ $(document).ready(function() {
 			$("#map").show();
 			map.trigger("resize");
 		}
-	});
+	}); });
 });
 </script>

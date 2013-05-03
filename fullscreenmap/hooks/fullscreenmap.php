@@ -30,14 +30,19 @@ class fullscreenmap {
 		// Only add the events if we are on that controller
 		if (Router::$controller == 'main')
 		{
-			plugin::add_javascript('fullscreenmap/views/js/jquery.colorbox');
-			#plugin::add_javascript('fullscreenmap/views/js/ui.draggable');
-			plugin::add_stylesheet('fullscreenmap/views/css/fullscreenmap');
-			plugin::add_stylesheet('fullscreenmap/views/css/colorbox');
+			Event::add('ushahidi_filter.view_pre_render.layout', array($this, 'add_requirements'));
 			
 			Event::add('ushahidi_action.header_scripts', array($this, '_main_js'));
 			Event::add('ushahidi_action.map_main_filters', array($this, '_button'));
 		}
+	}
+	
+	public function add_requirements()
+	{
+		Requirements::js('plugins/fullscreenmap/views/js/jquery.colorbox.js');
+		#plugin::add_javascript('fullscreenmap/views/js/ui.draggable');
+		Requirements::css('plugins/fullscreenmap/views/css/fullscreenmap.css');
+		Requirements::css('plugins/fullscreenmap/views/css/colorbox.css');
 	}
 	
 	public function _main_js()
